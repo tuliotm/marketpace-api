@@ -1,2 +1,5 @@
+All:
+  Exclude:
+    - rspec/**/*.rb
 Style/Documentation:
   Enabled: false
