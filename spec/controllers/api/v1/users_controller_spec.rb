@@ -11,7 +11,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
     
     it 'returns the information about a reporter on a hash' do
-      user_response = JSON.parse(response.body, symbolize_names: true)
+      user_response = json_response
       expect(user_response[:email]).to eq @user.email
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
 
       it 'renders the json representation for the user record just created' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response[:email]).to eq @user_attribute[:email]
       end
 
@@ -94,5 +94,14 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
       it { should respond_with 422 }
     end
+  end
+
+  describe 'DELETE #destroy' do 
+    before(:each) do
+      @user = FactoryBot.create(:user)
+      delete :destroy, params: { id: @user.id }, format: :json
+    end
+
+    it { should respond_with 204 }
   end
 end
