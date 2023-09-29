@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApiConstraints
-  attr_reader :options, :default
+  attr_accessor :version, :default
 
   def initialize(options)
     @version = options[:version]
